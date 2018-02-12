@@ -1,0 +1,33 @@
+<p id="notice"><%= notice %></p>
+
+<h1>
+  <%= @fighter.name %>
+</h1>
+
+<p>
+  <strong>Damage:</strong>
+  <%= @fighter.damage %>
+</p>
+
+<p>
+  <strong>Hp:</strong>
+  <%= @fighter.hp %>
+</p>
+
+<p>
+  <strong>Strength:</strong>
+  <%= @fighter.strength %>
+</p>
+
+<p>
+  <strong>Dexterity:</strong>
+  <%= @fighter.dexterity %>
+</p>
+
+<p>
+  <strong>Intelligence:</strong>
+  <%= @fighter.intelligence %>
+</p>
+
+<%= link_to 'Edit', edit_fighter_path(@fighter) %> |
+<%= link_to 'Back', fighters_path %>

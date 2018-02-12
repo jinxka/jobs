@@ -1,0 +1,59 @@
+<head>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <script type="text/javascript">
+      function chooseFighter() {
+          console.log(parseInt($("#select_fighter1").val()));
+          $(".fighter1").val(parseInt($("#select_fighter1").val()));
+          $(".fighter2").val(parseInt($("#select_fighter2").val()));
+      }
+
+      $(document).ready(function() {
+          chooseFighter();
+          $("#select_fighter1").change(function() {
+              chooseFighter();
+          });
+          $("#select_fighter2").change(function() {
+              chooseFighter();
+          });
+      });
+  </script>
+</head>
+
+<%= form_with(model: match, local: true) do |form| %>
+  <% if match.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(match.errors.count, "error") %> prohibited this match from being saved:</h2>
+
+      <ul>
+      <% match.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= form.label :fighter1 %>
+    <%= form.hidden_field :fighter1, value: nil, class:"fighter1"%>
+    <%= select_tag :select_fighter1, options_for_select(@fighter.collect{ |u| [u.name, u.id] }) %>
+  </div>
+
+  <div class="field">
+    <%= form.label :fighter2 %>
+    <%= form.hidden_field :fighter2, value: nil, class:"fighter2"%>
+    <%= select_tag :select_fighter2, options_for_select(@fighter.collect{ |u| [u.name, u.id] }) %>
+  </div>
+
+  <div class="field">
+    <%= form.hidden_field :winner, value: nil%>
+  </div>
+
+  <div class="field">
+    <%= form.label :log %>
+    <%= form.text_area :log, id: :match_log %>
+  </div>
+
+  <div class="actions">
+    <%= form.submit %>
+  </div>
+<% end %>

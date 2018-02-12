@@ -1,0 +1,11 @@
+<h1>New Match</h1>
+
+<% if @match.errors %>
+  <% @match.errors.each do |error| %>
+    <%= error.message %>
+    <% end %>
+<% end %>
+
+<%= render 'form', match: @match %>
+
+<%= link_to 'Back', matches_path %>
