@@ -31,9 +31,9 @@ ActiveRecord::Schema.define(version: 20180211143049) do
   end
 
   create_table "matches", force: :cascade do |t|
-    t.integer "fighter1"
-    t.integer "fighter2"
-    t.integer "winner"
+    t.string "fighter1"
+    t.string "fighter2"
+    t.string "winner"
     t.text "log"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false

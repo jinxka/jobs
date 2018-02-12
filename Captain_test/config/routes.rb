@@ -1,6 +1,7 @@
 Rails.application.routes.draw do
+  get 'welcome/index'
+
   resources :matches
   resources :fighters
-  get 'welcome/index'
   root 'welcome#index'
 end
