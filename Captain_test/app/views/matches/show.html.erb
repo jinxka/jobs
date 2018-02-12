@@ -17,8 +17,7 @@
 
 <p>
   <strong>Log:</strong>
-  <%= @match.log %>
+  <%= simple_format(@match.log) %>
 </p>
 
-<%= link_to 'Edit', edit_match_path(@match) %> |
 <%= link_to 'Back', matches_path %>
