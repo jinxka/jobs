@@ -1,0 +1,86 @@
+<head>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <script type="text/javascript">
+      function pointsLeft() {
+          console.log(parseInt($('.level').val()));
+          points_left = (parseInt($('.level').val()) * 10) - (parseInt($(".strength").val()) + parseInt($(".dexterity").val()) +parseInt($(".intelligence").val()));
+          $(".talent_point").text(points_left);
+          return (points_left);
+      }
+
+      $(document).ready(function() {
+          pointsLeft();
+          $("button.down").click(function(e) {
+              e.preventDefault();
+              e.stopPropagation();
+              if (parseInt($(this).siblings(".stat").val()) > 0)
+                  $(this).siblings(".stat").val(parseInt($(this).siblings(".stat").val()) -1);
+              pointsLeft();
+          });
+
+          $("button.up").click(function(e) {
+              e.preventDefault();
+              e.stopPropagation();
+              if (pointsLeft() > 0)
+                  $(this).siblings(".stat").val(parseInt($(this).siblings(".stat").val()) + 1);
+              pointsLeft();
+          });
+      });
+  </script>
+</head>
+
+<%= form_with(model: fighter, local: true) do |form| %>
+    <% if fighter.errors.any? %>
+      <div id="error_explanation">
+        <h2><%= pluralize(fighter.errors.count, "error") %> prohibited this fighter from being saved:</h2>
+
+        <ul>
+        <% fighter.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+        </ul>
+      </div>
+    <% end %>
+
+    <h3>Talent points = <span class="talent_point">0</span></h3>
+
+    <div class="field">
+      <%= form.label :name %>
+      <%= form.text_field :name, id: :fighter_name %>
+    </div>
+
+    <div class="field">
+      <%= form.label :hp %>
+      <%= form.number_field :hp, id: :fighter_hp, disabled: true%>
+    </div>
+
+    <div class="field">
+      <%= form.label :damage %>
+      <%= form.number_field :damage, id: :fighter_damage, disabled: true %>
+    </div>
+
+    <div class="field">
+      <%= form.label :strength %>
+      <button class="down">-</button>
+      <%= form.number_field :strength, value:0, in:0..30, id: :fighter_strength, class: 'stat strength', disabled: true %>
+      <button class="up">+</button>
+    </div>
+
+    <div class="field">
+      <%= form.label :dexterity %>
+      <button class="down">-</button>
+      <%= form.number_field :dexterity, value:0, in:0..30, id: :fighter_dexterity, class: 'stat dexterity', disabled: true%>
+      <button class="up">+</button>
+    </div>
+
+    <div class="field">
+      <%= form.label :intelligence %>
+      <button class="down">-</button>
+      <%= form.number_field :intelligence, value:0, in:0..30, id: :fighter_intelligence, class: 'stat intelligence', disabled: true %>
+      <button class="up">+</button>
+    </div>
+    <%= form.hidden_field :level, value: @fighter.level, class:'level'%>
+    <div class="actions">
+      <%= form.submit %>
+    </div>
+<% end %>
