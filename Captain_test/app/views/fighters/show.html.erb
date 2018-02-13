@@ -5,6 +5,26 @@
 </h1>
 
 <p>
+  <strong>Level:</strong>
+  <%= @fighter.level %>
+</p>
+
+<p>
+  <strong>Fights:</strong>
+  <%= @fights %>
+</p>
+
+<p>
+  <strong>Wins:</strong>
+  <%= @victory %>
+</p>
+
+<p>
+  <strong>Winrate:</strong>
+  <%= "#{@winrate}%" %>
+</p>
+
+<p>
   <strong>Damage:</strong>
   <%= @fighter.damage %>
 </p>
@@ -27,6 +47,13 @@
 <p>
   <strong>Intelligence:</strong>
   <%= @fighter.intelligence %>
+</p>
+
+<p>
+  <strong>Weapon:</strong>
+  <% if @weapon %>
+      <%="#{@weapon.name} -> #{@weapon.damage} dmg :: #{@weapon.strength} str / #{@weapon.intelligence} intel / #{@weapon.dexterity} dext" %>
+  <% end %>
 </p>
 
 <%= link_to 'Edit', edit_fighter_path(@fighter) %> |

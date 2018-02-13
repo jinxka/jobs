@@ -10,15 +10,21 @@ class FightersController < ApplicationController
   # GET /fighters/1
   # GET /fighters/1.json
   def show
+    @victory = Match.victory(@fighter.name).count
+    @fights = Match.all_fight(@fighter.name).count
+    @winrate = @fights != 0 ? (@victory.to_f / @fights.to_f) * 100 : 0
+    @weapon = Weapon.find(@fighter.weapon_id) if !@fighter.weapon_id.nil?
   end
 
   # GET /fighters/new
   def new
     @fighter = Fighter.new
+    @weapon = Weapon.valid_weapon(@fighter.dexterity, @fighter.strength, @fighter.intelligence) || []
   end
 
   # GET /fighters/1/edit
   def edit
+    @weapon = Weapon.valid_weapon(@fighter.dexterity, @fighter.strength, @fighter.intelligence) || []
   end
 
   # POST /fighters
@@ -64,6 +70,6 @@ class FightersController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def fighter_params
-      params.require(:fighter).permit(:name, :damage, :hp, :strength, :dexterity, :intelligence, :level)
+      params.require(:fighter).permit(:name, :strength, :dexterity, :intelligence, :weapon_id, :talent)
     end
 end

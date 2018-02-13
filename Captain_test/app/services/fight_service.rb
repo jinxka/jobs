@@ -1,8 +1,8 @@
 
 class FightService
   def initialize(match_params)
-    @P1 = Fighter.find(match_params["fighter1"])
-    @P2 = Fighter.find(match_params["fighter2"])
+    @P1 = Fighter.find(match_params["first_fighter"])
+    @P2 = Fighter.find(match_params["second_fighter"])
     @message = "Fight starts\r"
   end
   
@@ -19,8 +19,8 @@ class FightService
     winner = @P1.hp <= 0 ? @P2.name : @P1.name
     @message += @P1.hp <= 0 ? "#{@P2.name} WINS !" : "#{@P1.name} WINS !"
     {
-        fighter1:@P1.name,
-        fighter2:@P2.name,
+        first_fighter:@P1.name,
+        second_fighter:@P2.name,
         winner: winner,
         log: @message
     }

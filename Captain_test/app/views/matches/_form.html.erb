@@ -1,22 +1,18 @@
 <head>
-  <script type="text/javascript">
-      function chooseFighter() {
-          $(".fighter1").val(parseInt($("#select_fighter1").val()));
-          $(".fighter2").val(parseInt($("#select_fighter2").val()));
-      }
-
+  <script>
       $(document).ready(function() {
           chooseFighter();
-          $("#select_fighter1").change(function() {
+
+          $("#select_first_fighter").change(function() {
               chooseFighter();
           });
-          $("#select_fighter2").change(function() {
+
+          $("#select_second_fighter").change(function() {
               chooseFighter();
           });
       });
   </script>
 </head>
-
 <%= form_with(model: match, local: true) do |form| %>
   <% if match.errors.any? %>
     <div id="error_explanation">
@@ -31,15 +27,15 @@
   <% end %>
 
   <div class="field">
-    <%= form.label :fighter1 %>
-    <%= form.hidden_field :fighter1, value: nil, class:"fighter1"%>
-    <%= select_tag :select_fighter1, options_for_select(@fighter.collect{ |u| [u.name, u.id] }) %>
+    <%= form.label :first_fighter %>
+    <%= form.hidden_field :first_fighter, value: nil, class:"first_fighter"%>
+    <%= select_tag :select_first_fighter, options_for_select(@fighter.collect{ |u| [u.name, u.id] }) %>
   </div>
 
   <div class="field">
-    <%= form.label :fighter2 %>
-    <%= form.hidden_field :fighter2, value: nil, class:"fighter2"%>
-    <%= select_tag :select_fighter2, options_for_select(@fighter.collect{ |u| [u.name, u.id] }) %>
+    <%= form.label :second_fighter %>
+    <%= form.hidden_field :second_fighter, value: nil, class:"second_fighter"%>
+    <%= select_tag :select_second_fighter, options_for_select(@fighter.collect{ |u| [u.name, u.id] }) %>
   </div>
 
   <div class="field">
@@ -47,8 +43,7 @@
   </div>
 
   <div class="field">
-    <%= form.label :log %>
-    <%= form.text_area :log, id: :match_log %>
+    <%= form.hidden_field :log, id: :match_log %>
   </div>
 
   <div class="actions">

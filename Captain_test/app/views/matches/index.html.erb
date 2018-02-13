@@ -1,6 +1,6 @@
 <p id="notice"><%= notice %></p>
 
-<h1>Arena</h1>
+<h1>Arena History</h1>
 
 <table>
   <thead>
@@ -15,8 +15,8 @@
   <tbody>
     <% @matches.each do |match| %>
       <tr>
-        <td><%= match.fighter1 %></td>
-        <td><%= match.fighter2 %></td>
+        <td><%= match.first_fighter %></td>
+        <td><%= match.second_fighter %></td>
         <td><%= match.winner %></td>
         <td><%= link_to 'Show', match %></td>
       </tr>
@@ -26,4 +26,8 @@
 
 <br>
 
-<%= link_to 'Accueil', root_path %> <%= link_to 'New Match', new_match_path %>
+<h4><%= link_to 'Accueil', root_path %>   <%= link_to 'New Match', new_match_path %></h4>
+
+<h4><%= link_to 'New Fighter', new_fighter_path %>   <%= link_to 'Fighters List', fighters_path %></h4>
+
+<h4><%= link_to 'New Weapon', new_weapon_path %>   <%= link_to 'Weapons List', weapons_path %></h4>
