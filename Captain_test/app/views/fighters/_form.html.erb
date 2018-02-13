@@ -5,9 +5,10 @@
           $("button.down").click(function (e) {
               e.preventDefault();
               e.stopPropagation();
-              if (parseInt($(this).siblings(".stat").val()) > 0)
+              if (parseInt($(this).siblings(".stat").attr("data-base-value")) < parseInt($(this).siblings(".stat").val())) {
                   $(this).siblings(".stat").val(parseInt($(this).siblings(".stat").val()) - 1);
-              pointsLeft();
+                  pointsLeft();
+              }
           });
 
           $("button.up").click(function (e) {
@@ -59,21 +60,21 @@
     <div class="field">
       <%= form.label :strength %>
       <button class="down">-</button>
-      <%= form.number_field :strength, min: 0, id: :fighter_strength, class: 'stat strength', readonly: true %>
+      <%= form.number_field :strength, min: 0, id: :fighter_strength, class: 'stat strength', readonly: true, data: { "base-value": @fighter.strength } %>
       <button class="up">+</button>
     </div>
 
     <div class="field">
       <%= form.label :dexterity %>
       <button class="down">-</button>
-      <%= form.number_field :dexterity, min: @fighter.dexterity, id: :fighter_dexterity, class: 'stat dexterity', readonly: true%>
+      <%= form.number_field :dexterity, min: @fighter.dexterity, id: :fighter_dexterity, class: 'stat dexterity', readonly: true, data: { "base-value": @fighter.dexterity } %>
       <button class="up">+</button>
     </div>
 
     <div class="field">
       <%= form.label :intelligence %>
       <button class="down">-</button>
-      <%= form.number_field :intelligence, min: 0, id: :fighter_intelligence, class: 'stat intelligence', readonly: true %>
+      <%= form.number_field :intelligence, min: 0, id: :fighter_intelligence, class: 'stat intelligence', readonly: true, data: { "base-value": @fighter.intelligence } %>
       <button class="up">+</button>
     </div>
 

@@ -7,5 +7,8 @@ class CreateMatches < ActiveRecord::Migration[5.1]
       t.text :log
       t.timestamps
     end
+    add_index :matches, :first_fighter
+    add_index :matches, :second_fighter
+    add_index :matches, :winner
   end
 end

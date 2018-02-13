@@ -12,7 +12,7 @@ class FightersController < ApplicationController
   def show
     @victory = Match.victory(@fighter.name).count
     @fights = Match.all_fight(@fighter.name).count
-    @winrate = @fights != 0 ? (@victory / @fights) * 100 : 0
+    @winrate = @fights != 0 ? (@victory.to_f / @fights.to_f) * 100 : 0
     @weapon = Weapon.find(@fighter.weapon_id) if !@fighter.weapon_id.nil?
   end
 
@@ -70,6 +70,6 @@ class FightersController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def fighter_params
-      params.require(:fighter).permit(:name, :strength, :dexterity, :intelligence, :weapon_id)
+      params.require(:fighter).permit(:name, :strength, :dexterity, :intelligence, :weapon_id, :talent)
     end
 end
