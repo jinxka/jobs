@@ -7,7 +7,6 @@
               e.stopPropagation();
               if (parseInt($(this).siblings(".stat").val()) > 0)
                   $(this).siblings(".stat").val(parseInt($(this).siblings(".stat").val()) - 1);
-              console.log(parseInt($(this).siblings(".stat").val()));
               pointsLeft();
           });
 
@@ -16,7 +15,6 @@
               e.stopPropagation();
               if (pointsLeft() > 0)
                   $(this).siblings(".stat").val(parseInt($(this).siblings(".stat").val()) + 1);
-              console.log(parseInt($(this).siblings(".stat").val()));
               pointsLeft();
           });
       });
@@ -45,17 +43,17 @@
 
     <div class="field">
       <%= form.label :level %>
-      <%= form.number_field :level, id: :fighter_level, readonly: true%>
+      <%= form.number_field :level, id: :fighter_level, disabled: true%>
     </div>
 
     <div class="field">
       <%= form.label :hp %>
-      <%= form.number_field :hp, id: :fighter_hp, readonly: true%>
+      <%= form.number_field :hp, id: :fighter_hp, disabled: true%>
     </div>
 
     <div class="field">
       <%= form.label :damage %>
-      <%= form.number_field :damage, id: :fighter_damage, readonly: true %>
+      <%= form.number_field :damage, id: :fighter_damage, disabled: true %>
     </div>
 
     <div class="field">
@@ -68,7 +66,7 @@
     <div class="field">
       <%= form.label :dexterity %>
       <button class="down">-</button>
-      <%= form.number_field :dexterity, min: 0, id: :fighter_dexterity, class: 'stat dexterity', readonly: true%>
+      <%= form.number_field :dexterity, min: @fighter.dexterity, id: :fighter_dexterity, class: 'stat dexterity', readonly: true%>
       <button class="up">+</button>
     </div>
 
@@ -78,6 +76,12 @@
       <%= form.number_field :intelligence, min: 0, id: :fighter_intelligence, class: 'stat intelligence', readonly: true %>
       <button class="up">+</button>
     </div>
+
+    <div class="field">
+      <%= form.label :weapon_id%>
+      <%= form.select :weapon_id, options_for_select(@weapon.collect{ |u| ["#{u.name} -> #{u.damage} dmg :: #{u.dexterity} dext / #{u.strength} str / #{u.intelligence} intel", u.id] }, @fighter.weapon_id), include_blank: true %>
+    </div>
+
     <%= form.hidden_field :talent, id: :fighter_talent, class:'talent'%>
     <div class="actions">
       <%= form.submit %>

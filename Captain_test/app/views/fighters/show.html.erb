@@ -44,7 +44,12 @@
   <%= @fighter.intelligence %>
 </p>
 
-<%= link_to 'Edit', edit_fighter_path(@fighter) %>
+<p>
+  <strong>Weapon:</strong>
+  <% if @weapon %>
+      <%="#{@weapon.name} -> #{@weapon.damage} dmg :: #{@weapon.strength} str / #{@weapon.intelligence} intel / #{@weapon.dexterity} dext" %>
+  <% end %>
+</p>
 
-<h4><%= link_to 'New Match', new_match_path %> <%= link_to 'Arena History', matches_path %></h4>
-<h4><%= link_to 'New Fighter', new_fighter_path %> <%= link_to 'Fighters List', fighters_path %></h4>
+<%= link_to 'Edit', edit_fighter_path(@fighter) %> |
+<%= link_to 'Back', fighters_path %>
