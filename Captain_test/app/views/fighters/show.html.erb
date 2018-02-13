@@ -5,6 +5,21 @@
 </h1>
 
 <p>
+  <strong>Fights:</strong>
+  <%= @fights %>
+</p>
+
+<p>
+  <strong>Wins:</strong>
+  <%= @victory %>
+</p>
+
+<p>
+  <strong>Winrate:</strong>
+  <%= "#{@winrate}%" %>
+</p>
+
+<p>
   <strong>Damage:</strong>
   <%= @fighter.damage %>
 </p>
@@ -29,5 +44,7 @@
   <%= @fighter.intelligence %>
 </p>
 
-<%= link_to 'Edit', edit_fighter_path(@fighter) %> |
-<%= link_to 'Back', fighters_path %>
+<%= link_to 'Edit', edit_fighter_path(@fighter) %>
+
+<h4><%= link_to 'New Match', new_match_path %> <%= link_to 'Arena History', matches_path %></h4>
+<h4><%= link_to 'New Fighter', new_fighter_path %> <%= link_to 'Fighters List', fighters_path %></h4>

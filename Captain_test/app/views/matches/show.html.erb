@@ -2,12 +2,12 @@
 
 <p>
   <strong>Fighter1:</strong>
-  <%= @match.fighter1 %>
+  <%= @match.first_fighter %>
 </p>
 
 <p>
   <strong>Fighter2:</strong>
-  <%= @match.fighter2 %>
+  <%= @match.second_fighter %>
 </p>
 
 <p>
@@ -20,4 +20,5 @@
   <%= simple_format(@match.log) %>
 </p>
 
-<%= link_to 'Back', matches_path %>
+<h4><%= link_to 'New Match', new_match_path %> <%= link_to 'Arena History', matches_path %></h4>
+<h4><%= link_to 'New Fighter', new_fighter_path %> <%= link_to 'Fighters List', fighters_path %></h4>

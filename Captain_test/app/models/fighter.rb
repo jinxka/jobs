@@ -15,7 +15,9 @@ class Fighter < ApplicationRecord
   def level_up
     if (self.experience >= self.level)
       self.experience = 0
+      self.talent += 1
       self.level += 1
+      self.hp += 10
     end
   end
 end

@@ -1,27 +1,22 @@
 <head>
-  <script type="text/javascript">
-      function pointsLeft() {
-          console.log(parseInt($('.level').val()));
-          points_left = (parseInt($('.level').val()) * 10) - (parseInt($(".strength").val()) + parseInt($(".dexterity").val()) +parseInt($(".intelligence").val()));
-          $(".talent_point").text(points_left);
-          return (points_left);
-      }
-
+  <script>
       $(document).ready(function() {
           pointsLeft();
-          $("button.down").click(function(e) {
+          $("button.down").click(function (e) {
               e.preventDefault();
               e.stopPropagation();
               if (parseInt($(this).siblings(".stat").val()) > 0)
-                  $(this).siblings(".stat").val(parseInt($(this).siblings(".stat").val()) -1);
+                  $(this).siblings(".stat").val(parseInt($(this).siblings(".stat").val()) - 1);
+              console.log(parseInt($(this).siblings(".stat").val()));
               pointsLeft();
           });
 
-          $("button.up").click(function(e) {
+          $("button.up").click(function (e) {
               e.preventDefault();
               e.stopPropagation();
               if (pointsLeft() > 0)
                   $(this).siblings(".stat").val(parseInt($(this).siblings(".stat").val()) + 1);
+              console.log(parseInt($(this).siblings(".stat").val()));
               pointsLeft();
           });
       });
@@ -49,36 +44,41 @@
     </div>
 
     <div class="field">
+      <%= form.label :level %>
+      <%= form.number_field :level, id: :fighter_level, readonly: true%>
+    </div>
+
+    <div class="field">
       <%= form.label :hp %>
-      <%= form.number_field :hp, id: :fighter_hp, disabled: true%>
+      <%= form.number_field :hp, id: :fighter_hp, readonly: true%>
     </div>
 
     <div class="field">
       <%= form.label :damage %>
-      <%= form.number_field :damage, id: :fighter_damage, disabled: true %>
+      <%= form.number_field :damage, id: :fighter_damage, readonly: true %>
     </div>
 
     <div class="field">
       <%= form.label :strength %>
       <button class="down">-</button>
-      <%= form.number_field :strength, value:0, in:0..30, id: :fighter_strength, class: 'stat strength', disabled: true %>
+      <%= form.number_field :strength, min: 0, id: :fighter_strength, class: 'stat strength', readonly: true %>
       <button class="up">+</button>
     </div>
 
     <div class="field">
       <%= form.label :dexterity %>
       <button class="down">-</button>
-      <%= form.number_field :dexterity, value:0, in:0..30, id: :fighter_dexterity, class: 'stat dexterity', disabled: true%>
+      <%= form.number_field :dexterity, min: 0, id: :fighter_dexterity, class: 'stat dexterity', readonly: true%>
       <button class="up">+</button>
     </div>
 
     <div class="field">
       <%= form.label :intelligence %>
       <button class="down">-</button>
-      <%= form.number_field :intelligence, value:0, in:0..30, id: :fighter_intelligence, class: 'stat intelligence', disabled: true %>
+      <%= form.number_field :intelligence, min: 0, id: :fighter_intelligence, class: 'stat intelligence', readonly: true %>
       <button class="up">+</button>
     </div>
-    <%= form.hidden_field :level, value: @fighter.level, class:'level'%>
+    <%= form.hidden_field :talent, id: :fighter_talent, class:'talent'%>
     <div class="actions">
       <%= form.submit %>
     </div>

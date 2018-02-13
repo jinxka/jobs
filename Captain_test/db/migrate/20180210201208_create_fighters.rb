@@ -11,6 +11,7 @@ class CreateFighters < ActiveRecord::Migration[5.1]
       t.integer :level, default: 1
       t.integer :victory, default: 0
       t.integer :fight, default: 0
+      t.integer :talent, default: 10
       
       t.timestamps
     end

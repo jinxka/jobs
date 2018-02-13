@@ -26,13 +26,14 @@ ActiveRecord::Schema.define(version: 20180211143049) do
     t.integer "level", default: 1
     t.integer "victory", default: 0
     t.integer "fight", default: 0
+    t.integer "talent", default: 10
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
 
   create_table "matches", force: :cascade do |t|
-    t.string "fighter1"
-    t.string "fighter2"
+    t.string "first_fighter"
+    t.string "second_fighter"
     t.string "winner"
     t.text "log"
     t.datetime "created_at", null: false

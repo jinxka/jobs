@@ -10,6 +10,9 @@ class FightersController < ApplicationController
   # GET /fighters/1
   # GET /fighters/1.json
   def show
+    @victory = Match.victory(@fighter.name).count
+    @fights = Match.all_fight(@fighter.name).count
+    @winrate = @fights != 0 ? (@victory / @fights) * 100 : 0
   end
 
   # GET /fighters/new
@@ -64,6 +67,6 @@ class FightersController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def fighter_params
-      params.require(:fighter).permit(:name, :damage, :hp, :strength, :dexterity, :intelligence, :level)
+      params.require(:fighter).permit(:name, :damage, :hp, :strength, :dexterity, :intelligence, :level, :talent)
     end
 end
